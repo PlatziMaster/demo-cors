@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  django:
+    build:
+      context: ./api-django/
+      dockerfile: Dockerfile
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./api-django/:/src
+    ports:
+      - "8000:8000"
+  flask:
+    build:
+      context: ./api-flask/
+      dockerfile: Dockerfile
+    volumes:
+      - ./api-flask/:/app
+    ports:
+      - '8888:8888'
+  express:
+    build:
+      context: ./api-express/
+      dockerfile: Dockerfile
+    volumes:
+    - ./api-express/:/app
+    ports:
+      - '3000:3000'
+  nestjs:
+    build:
+      context: ./api-nestjs
+      dockerfile: Dockerfile
+    volumes:
+    - ./api-nestjs/:/app
+    ports:
+      - '3001:3001'
